@@ -5,40 +5,86 @@
         <title>DocSpace JavaScript SDK</title>
         <script src="https://suleymanovrn.onlyoffice.com/static/scripts/api.js"></script>
     </head>
-    
+    <style>
+        div {
+            padding:auto;
+        }
+        </style>
     <body>
         <div id="ds-frame"></div>
     </body>
+    
     <script>
+
+        var onSelectCallback = function (e) {
+            docSpace = DocSpace.SDK.initEditor({
+            "id": e.id,
+            "height":  "700px",
+            "width": "1000px"
+        });}
+
+        var onAppReady = function (e) {
+            var frame = DocSpace.SDK.frames["ds-frame"];
+        };
+
+        const config = {
+            "events": {
+                "onSelectCallback": onSelectCallback,
+                "onAppReady": onAppReady,
+            },
+            "height":  "700px",
+            "width": "500px"
+        };
+
+        var docSpace = DocSpace.SDK.initFileSelector(config);
+        
+    </script>
+
+
+
+
+
+
+
+        <script>
+        /*var onSelectCallback = function (e) {
+            var frame = DocSpace.SDK.frames["ds-frame"];
+            frame.getSelection().then(res => console.log(res));
+        }
 
         var onAppReady = function (e) {
             var frame = DocSpace.SDK.frames["ds-frame"];
             // EACH METHOD RUNS TWICE ON APP READY
             console.log("APP READY!");
-            ///////WORKING METHODS
+            
+
+            //WORKING METHODS
             //frame.getUserInfo().then(res => console.log(res));
-            frame.getFolderInfo().then(res => {
-                console.log("==== FOLDER INFO ====");
-                console.log(res);
-            });
-            ////frame.createFile(432068, "title").then(res => console.log(res));
-            //frame.createFolder(432068, "folder").then(res => console.log(res));
+            //frame.getFolderInfo().then(res => console.log(res));
+
+
+            //RUNS TWICE. CREATES TWO FILES, OR TWO FOLDERS
+            //frame.createFile(86190, "title").then(res => console.log(res));
+            //frame.createFolder(86190, "folder2").then(res => console.log(res));
             
             // RETURNS [] WHEN NOTHING SELECTED, POSSIBLY THE SAME AS 3 METHODS BELOW
             //frame.getSelection().then(res => console.log(res));
             
             // METHODS RETURN EMPTY ARRAYS
-            //frame.getFiles().then(res => console.log(res));
-            //frame.getFolders().then(res => console.log(res));
+            frame.getFiles().then(res => console.log(res));
+           // frame.getFolders().then(res => console.log(res));
             //frame.getList().then(res => console.log(res));
 
             // METHODS RETURN ERROR
             //frame.getConfig().then(res => console.log(res));
-            //frame.setListView("table").then(res => console.log(res));
+            //frame.setListView("tile");
             //frame.createRoom("room title", "EditingRoom").then(res => console.log(res));
 
             // METHOD CREATES FOLDER ON CREATE FILE
-            // frame.openModal("CreateFile").then(res => console.log(res));
+            //frame.openModal("CreateFile").then(res => console.log(res));
+
+
+            //docSpace.addTagsToRoom("108156", ["Test", "Test1"]);
         };
 
         const config = { 
@@ -62,7 +108,7 @@
             "locale": "en-US",
             "mode": "manager",
             "name": "frameDocSpace",
-            "rootPath": "/rooms/shared/",
+            "rootPath": "/rooms/personal/",
             "showFilter": true,
             "showHeader": true,
             "showMenu": true,
@@ -73,7 +119,8 @@
             "viewAs": "row",
             "width": "100%"
         };
-
         var docSpace = DocSpace.SDK.initManager(config);
+        //var docSpace = DocSpace.SDK.initFileSelector(config);*/
     </script>
+    
 </html>
