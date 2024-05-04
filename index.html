@@ -7,15 +7,71 @@
     </head>
     <style>
         div {
-            padding:auto;
+            padding-left: 300px;
         }
         </style>
     <body>
-        <div id="ds-frame"></div>
+        <div id="holder">
+            <div id="ds-frame"></div>
+        </div>
     </body>
     
-    <script>
 
+
+    <script>
+       //LOGIN 
+        var onSelectCallback = function (e) {
+            var frame = DocSpace.SDK.frames["ds-frame"];
+            frame.getSelection().then(res => console.log(res));
+        }
+
+        var onAppReady = function (e) {
+            var frame = DocSpace.SDK.frames["ds-frame"];
+            console.log("APP READY!");
+            var passwordHash = frame.createHash("#9PapsortNP#", frame.getHashSettings());
+            frame.login("suleymanovrashidn@gmail.com",passwordHash).then(res=>console.log(res));
+        };
+
+        const config = { 
+            
+            "destroyText": "",
+            "editorType": "embedded",
+            "events": {
+                "onSelectCallback": null,
+                "onCloseCallback": null,
+                "onAppReady": onAppReady,
+                "onAppError": null
+            },
+            "filter": {
+                "count": 100,
+                "page": 1,
+                "sortorder": "descending",
+                "sortby": "DateAndTime"
+            },
+            "frameId": "ds-frame",
+            "height":  "700px",
+            "id": null,
+            "locale": "en-US",
+            "mode": "manager",
+            "name": "frameDocSpace",
+            "rootPath": "/rooms/personal/",
+            "showFilter": true,
+            "showHeader": true,
+            "showMenu": true,
+            "showTitle": true,
+            "src": "https://suleymanovrn.onlyoffice.com",
+            "theme": "Base",
+            "type": "desktop",
+            "viewAs": "row",
+            "width": "100%"
+        };
+        var docSpace = DocSpace.SDK.initSystem(config);
+        //var docSpace = DocSpace.SDK.initFileSelector(config);
+        
+    </script>
+
+    <script>
+        /*
         var onSelectCallback = function (e) {
             docSpace = DocSpace.SDK.initEditor({
             "id": e.id,
@@ -36,7 +92,7 @@
             "width": "500px"
         };
 
-        var docSpace = DocSpace.SDK.initFileSelector(config);
+        var docSpace = DocSpace.SDK.initFileSelector(config);   
         
     </script>
 
